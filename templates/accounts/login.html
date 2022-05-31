@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+
+
+
+{% block content %}
+    {% if not request.user.is_authenticated %}
+        <div style="margin-top:30px;">
+            <header>Login Form<header>
+            {% if error %}
+                <p style="color:red;">{{error}}</p>
+            {% endif %}
+            <form action="/login/" method="POST">
+                {% csrf_token %}
+                <div style="margin-top:10px;">
+                    <input type="text" name="username" placeholder="Username" />
+                </div>
+                <div style="margin-top:10px;">
+                    <input type="password" name="password" placeholder="Password" />
+                </div>
+                <div style="margin-top:10px;">
+                    <button type="submit"> Login </button>
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <p>You are already logged in. <a href="/logout/">do you want to logout ?</a></p>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <h1>Welcome to my Blog</h1>
+        <hr>
+        <form action="/articles/" method="GET">
+            <input type="text" name="search" />
+            <input type="submit" />
+        </form>
+        <hr>
+        {% block content %}
+
+        {% endblock content %}
+    </body>
+</html>
