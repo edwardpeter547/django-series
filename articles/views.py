@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 # project file imports
 from . models import Article
+from . forms import ArticleForm
 
 # Create your views here.
 
@@ -12,16 +13,15 @@ from . models import Article
 @login_required
 def create_view(request):
     
-    context = {}
-    
-    if request.method == "POST":
-        title = request.POST.get("title")
-        author = request.POST.get("author")
-        category = request.POST.get("category")
-        content = request.POST.get("content")
+    form = ArticleForm(request.POST or None)
+    context = {"form": form}
+    if form.is_valid():
+        title = form.cleaned_data.get("title")
+        author = form.cleaned_data.get("author")
+        category = form.cleaned_data.get("category")
+        content = form.cleaned_data.get("content")
         article = Article.objects.create(title=title, author=author, category=category, content=content)
-        context["artcle"] = article
-        context["created"] = True
+        context.update({"article": article, "created": True})
     
     return render(request=request, template_name="articles/create.html", context=context)
 
