@@ -1,11 +1,27 @@
 
 # django related imports
+from dataclasses import fields
 from django import forms
+from . models import Article
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = ["title", "author", "category", "content"]
+        
+    def clean(self):
+        data = self.cleaned_data
+        title = data.get("title")
+        qs = Article.objects.all().filter(title__icontains=title)
+        if qs.exists():
+            self.add_error("title", f"\"{title}\" is already in use")
+        return data
+        
 
 
-class ArticleForm(forms.Form):
+class ArticleFormOld(forms.Form):
     title = forms.CharField()
-    author = forms.CharField()
+    author = forms.CharField() 
     category = forms.CharField()
     content = forms.CharField(widget=forms.Textarea)
     
