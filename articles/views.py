@@ -16,11 +16,7 @@ def create_view(request):
     form = ArticleForm(request.POST or None)
     context = {"form": form}
     if form.is_valid():
-        title = form.cleaned_data.get("title")
-        author = form.cleaned_data.get("author")
-        category = form.cleaned_data.get("category")
-        content = form.cleaned_data.get("content")
-        article = Article.objects.create(title=title, author=author, category=category, content=content)
+        article = form.save()
         context.update({"article": article, "created": True})
     
     return render(request=request, template_name="articles/create.html", context=context)
