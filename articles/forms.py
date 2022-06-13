@@ -12,8 +12,9 @@ class ArticleForm(forms.ModelForm):
     def clean(self):
         data = self.cleaned_data
         title = data.get("title")
-        qs = Article.objects.all().filter(title__icontains=title)
-        if qs.exists():
+        content = data.get("content")
+        is_title = Article.objects.all().filter(title__icontains=title)
+        if is_title.exists():
             self.add_error("title", f"\"{title}\" is already in use")
         return data
         
