@@ -6,18 +6,7 @@
         <div style="margin-top:30px;">
             <form method="POST" action="/articles/create">
                 {% csrf_token %}
-                <div style="margin-top:10px;">
-                    <input type="text" name="title", placeholder="Your Title" />
-                </div>
-                <div style="margin-top:10px;">
-                    <input type="number" name="author" placeholder="Article Author" />
-                </div>
-                <div style="margin-top:10px;">
-                    <input type="number" name="category" placeholder="Article Category" />
-                </div>
-                <div style="margin-top:10px;">
-                    <textarea name="content" placeholder="content" rows="4"></textarea>
-                </div>
+                {{ form.as_p }}
                 <div style="margin-top:10px;">
                     <button type="submit">create Article</button>
                 </div>

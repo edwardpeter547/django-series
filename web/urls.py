@@ -26,6 +26,7 @@ urlpatterns = [
     # account routes
     path('login/', login_view),
     path('logout/', logout_view),
+    path('register/',register_view),
     
     # home routes
     path('', home_view),
