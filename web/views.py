@@ -9,15 +9,15 @@ from django.template.loader import render_to_string
 # models related imports
 from articles.models import Article
 
-article = Article.objects.get(id=2)
+# article = Article.objects.get(id=2)
 artile_list = Article.objects.all()
 
 context = {
     "object_list": artile_list,
-    "title": article.title,
-    "id": article.id,
-    "content": article.content,
-    "datecreated": article.date_created.strftime("%dth, %B %Y")
+    # "title": article.title,
+    # "id": article.id,
+    # "content": article.content,
+    # "datecreated": article.date_created.strftime("%dth, %B %Y")
 }
 
 
